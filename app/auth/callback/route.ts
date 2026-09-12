@@ -1,0 +1,3 @@
+import { NextResponse } from 'next/server';
+import { ready,databaseClient } from '@/lib/session';
+export async function GET(request:Request){const url=new URL(request.url),origin=process.env.VERRA_ORIGIN||url.origin;if(ready()){const db=await databaseClient();const code=url.searchParams.get('code'),token=url.searchParams.get('token_hash');if(code){const result=await db.auth.exchangeCodeForSession(code);if(!result.error)return NextResponse.redirect(new URL('/visits',origin));}else if(token){const result=await db.auth.verifyOtp({token_hash:token,type:'email'});if(!result.error)return NextResponse.redirect(new URL('/visits',origin));}}return NextResponse.redirect(new URL('/signin?expired=1',origin));}

@@ -1,0 +1,4 @@
+import { z } from 'zod';
+import { ready,databaseClient,trustedOrigin } from '@/lib/session';
+import { privateJson } from '@/lib/respond';
+export async function POST(request:Request){if(!trustedOrigin(request))return privateJson({error:'Request origin rejected.'},403);if(!ready())return privateJson({error:'Sign-in is not connected in this environment yet.'},503);let email;try{const raw=await request.text();if(raw.length>1000)throw new Error();email=z.email().max(254).parse(JSON.parse(raw).email);}catch{return privateJson({error:'Enter your email address.'},400);}const db=await databaseClient();const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:process.env.VERRA_ORIGIN+'/auth/callback'}});return error?privateJson({error:'A sign-in link could not be sent. Try again shortly.'},429):privateJson({sent:true});}

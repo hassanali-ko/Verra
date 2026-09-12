@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.local-data/
+test-results/
+playwright-report/
+tests/
+.env*
+AGENTS.md
+CONTEXT.md
+private/
+*.log
+*.tsbuildinfo

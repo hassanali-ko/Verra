@@ -1,0 +1,3 @@
+import { personalSession } from '@/lib/session';
+import { privateJson,databaseError } from '@/lib/respond';
+export async function GET(){const session=await personalSession();if(!session)return privateJson({error:'Sign in to export your records.'},401);const result=await session.db.rpc('arrangement_snapshot');if(result.error)return databaseError(result.error);return new Response(JSON.stringify({format:'verra-personal-export-v1',exportedAt:new Date().toISOString(),workspace:result.data},null,2),{headers:{'Content-Type':'application/json','Content-Disposition':'attachment; filename="verra-personal-data.json"','Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'}});}
