@@ -49,3 +49,9 @@ AGENTS.md
 build/
 
 OPENAI_API_KEY
+# Filled-in AWS deployment config: account ids, role and secret ARNs.
+# runtime.example.json is the tracked template and stays.
+infra/runtime.local.json
+infra/runtime.*.local.json
+samconfig.toml
+.aws-sam/
