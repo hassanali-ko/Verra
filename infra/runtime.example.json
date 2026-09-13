@@ -1,0 +1,15 @@
+{
+  "agentRuntimeName": "verra_research",
+  "agentRuntimeArtifact": {"containerConfiguration": {"containerUri": "ACCOUNT.dkr.ecr.REGION.amazonaws.com/verra-agent:VERSION"}},
+  "roleArn": "arn:aws:iam::ACCOUNT:role/VerraAgentRuntime",
+  "networkConfiguration": {"networkMode": "PUBLIC"},
+  "protocolConfiguration": {"serverProtocol": "HTTP"},
+  "environmentVariables": {
+    "SUPABASE_PRODUCT_URL": "https://PROJECT.supabase.co",
+    "OPENAI_API_KEY_SECRET_ARN": "arn:aws:secretsmanager:REGION:ACCOUNT:secret:VerraOpenAI-SUFFIX",
+    "VERRA_WORKER_SERVICE_KEY_SECRET_ARN": "arn:aws:secretsmanager:REGION:ACCOUNT:secret:VerraWorker-SUFFIX",
+    "VERRA_MODEL_ID": "gpt-5.6-luna",
+    "VERRA_AGENT_ENV": "production",
+    "OTEL_SDK_DISABLED": "true"
+  }
+}

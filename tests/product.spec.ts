@@ -32,7 +32,7 @@ test('personal journey: needs, visit, queue, pause, resume, cancel and sign out'
  await expect(page.getByLabel('May be shared with this venue').first()).not.toBeChecked();
  page.once('dialog',dialog=>dialog.dismiss());await page.getByRole('button',{name:'Access needs',exact:true}).click();await expect(page.getByLabel('A name for this plan')).toHaveValue(title);
  await page.getByRole('button',{name:'Save this visit'}).click();await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible();
- await page.getByRole('button',{name:'Queue information check'}).click();await expect(page.getByRole('status')).toContainText('Agent connection is pending');
+ await page.getByRole('button',{name:'Queue information check'}).click();await expect(page.getByRole('status')).toContainText('waiting for research');
  await page.getByRole('button',{name:'Pause',exact:true}).click();await expect(page.getByRole('button',{name:'Resume',exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Resume',exact:true}).click();await page.getByRole('button',{name:'Queue information check'}).click();
  page.once('dialog',dialog=>dialog.accept());await page.getByRole('button',{name:'Cancel arrangement'}).click();await expect(page.getByText('This arrangement is cancelled.',{exact:false})).toBeVisible();

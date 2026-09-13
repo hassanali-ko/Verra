@@ -10,3 +10,10 @@ CONTEXT.md
 private/
 *.log
 *.tsbuildinfo
+
+OPENAI_API_KEY
+
+# Python worker deploys separately to AgentCore.
+.venv/
+agent/
+infra/

@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Scheduled Verra research dispatch. The AgentCore runtime is deployed separately.
+Parameters:
+  ProductDatabaseUrl:
+    Type: String
+    AllowedPattern: 'https://[a-zA-Z0-9.-]+'
+  WorkerSecretArn:
+    Type: String
+  AgentRuntimeArn:
+    Type: String
+Resources:
+  Dispatcher:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: dispatcher.lambda_handler
+      Runtime: python3.12
+      Timeout: 240
+      MemorySize: 256
+      ReservedConcurrentExecutions: 2
+      Environment:
+        Variables:
+          SUPABASE_PRODUCT_URL: !Ref ProductDatabaseUrl
+          WORKER_SECRET_ARN: !Ref WorkerSecretArn
+          AGENT_RUNTIME_ARN: !Ref AgentRuntimeArn
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: secretsmanager:GetSecretValue
+              Resource: !Ref WorkerSecretArn
+            - Effect: Allow
+              Action: bedrock-agentcore:InvokeAgentRuntime
+              Resource:
+                - !Ref AgentRuntimeArn
+                - !Sub '${AgentRuntimeArn}/runtime-endpoint/*'
+      Events:
+        DueWork:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 minute)
+            Enabled: true
+      EventInvokeConfig:
+        MaximumRetryAttempts: 0
+  DispatcherLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${Dispatcher}'
+      RetentionInDays: 14
+Outputs:
+  DispatcherArn:
+    Value: !GetAtt Dispatcher.Arn

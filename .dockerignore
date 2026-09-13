@@ -1,0 +1,13 @@
+**
+!agent/
+!agent/pyproject.toml
+!agent/requirements.lock.txt
+!agent/verra_agent/
+!agent/verra_agent/**
+**/__pycache__/**
+**/*.pyc
+**/.env*
+**/*.key
+**/*.pem
+
+OPENAI_API_KEY

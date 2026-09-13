@@ -29,7 +29,7 @@ test('personal arrangements: ownership, consent, atomic work and recovery',async
   await t.test('another account sees no personal rows and cannot mutate them',async()=>{
    const snapshot=await rpc(db,stranger,'arrangement_snapshot') as Snapshot;
    assert.equal(snapshot.profile,null);for(const key of ['cases','requirements','permissions','jobs','events'] as const)assert.equal(snapshot[key].length,0);
-   for(const table of ['access_profiles','cases','case_requirements','case_permissions','outbox_jobs','case_events'])assert.equal((await asUser(db,stranger,`select * from public.${table}`)).length,0);
+   for(const table of ['access_profiles','cases','case_requirements','case_permissions','outbox_jobs','case_events'])assert.equal((await asUser(db,stranger,`select ${table==='outbox_jobs'?'id':'*'} from public.${table}`)).length,0);
    await assert.rejects(rpc(db,stranger,'control_case',{p_case:caseId,p_version:1,p_action:'cancel'}),{code:'42501'});
    await assert.rejects(rpc(db,stranger,'request_case_work',{p_case:caseId,p_version:1,p_key:randomUUID()}),{code:'42501'});
    await assert.rejects(asUser(db,owner,"update public.cases set owner_id=$1 where id=$2",[stranger,caseId]),{code:'42501'});

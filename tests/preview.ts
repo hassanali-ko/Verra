@@ -2,7 +2,7 @@
 import { createServer } from 'node:http';
 import { spawn } from 'node:child_process';
 import { mkdir } from 'node:fs/promises';
-import { database,people,rpc,rpcDefinitions } from './database';
+import { database,people,rpc,rpcDefinitions,workerDefinitions,workerRpc } from './database';
 
 await mkdir('.local-data',{recursive:true});
 const db=await database('.local-data/preview');
@@ -28,8 +28,13 @@ const server=createServer(async(req,res)=>{
   if(url.pathname==='/auth/v1/logout'){res.writeHead(204);res.end();return;}
   if(url.pathname.startsWith('/auth/')){reply(503,{message:'Email login is not connected in this local test service.'});return;}
   if(req.method!=='POST'||!url.pathname.startsWith('/rest/v1/rpc/')){reply(404,{message:'Unsupported local route'});return;}
-  if(index<0){reply(401,{code:'42501',message:'Sign in required'});return;}
   const name=url.pathname.split('/').at(-1)!;
+  if(Object.hasOwn(workerDefinitions,name)){
+   if(req.headers.authorization!=='Bearer local-preview-worker-only'){reply(403,{code:'42501',message:'Worker access required'});return;}
+   let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>120000){reply(413,{message:'Request too large'});return;}}
+   reply(200,await workerRpc(db,name as keyof typeof workerDefinitions,JSON.parse(raw||'{}')));return;
+  }
+  if(index<0){reply(401,{code:'42501',message:'Sign in required'});return;}
   if(!Object.hasOwn(rpcDefinitions,name)){reply(404,{message:'Unknown function'});return;}
   let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>45000){reply(413,{message:'Request too large'});return;}}
   const input=JSON.parse(raw||'{}');

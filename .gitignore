@@ -43,3 +43,9 @@ AGENTS.md
 *.docx
 *.xlsx
 # Runtime prompts and sanitized fixtures ARE source. Do not blanket-ignore them.
+
+# Python packaging output
+*.egg-info/
+build/
+
+OPENAI_API_KEY
