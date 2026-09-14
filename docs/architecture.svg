@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1300" viewBox="0 0 1800 1300" role="img" aria-labelledby="title desc">
+<title id="title">Verra personal research architecture</title><desc id="desc">A person uses Next.js on Vercel. Supabase holds account-scoped visits and jobs. EventBridge triggers Lambda to claim work and invoke Python Strands on AgentCore. Strands uses direct OpenAI Luna, public-page retrieval and permission-aware drafting. Validated reports return to Postgres. The example demo stays in the browser.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 Z" fill="#355864"/></marker></defs>
+<rect width="1800" height="1300" fill="#F4EDE1"/>
+<text x="50" y="62" font-family="Arial, sans-serif" font-size="36" font-weight="700" fill="#21353F">VERRA  /  PERSONAL RESEARCH ARCHITECTURE</text>
+<text x="50" y="101" font-family="Arial, sans-serif" font-size="23" font-weight="400" fill="#21353F">From a person’s access requirements to a source-backed report</text>
+<rect x="50" y="145" width="305" height="155" rx="16" fill="#D9CCBA" stroke="#799DAC" stroke-width="1.6"/>
+<text x="72" y="179" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#21353F">Person</text>
+<text x="72" y="212" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Visit and venue website</text>
+<text x="72" y="240" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Individual access needs</text>
+<text x="72" y="268" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Sharing choices</text>
+<rect x="405" y="145" width="380" height="155" rx="16" fill="#FFFFFF" stroke="#799DAC" stroke-width="1.6"/>
+<text x="427" y="179" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#21353F">Next.js on Vercel</text>
+<text x="427" y="212" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Web app and protected routes</text>
+<text x="427" y="240" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Validate the signed-in person</text>
+<text x="427" y="268" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Create, edit, queue and review</text>
+<rect x="835" y="145" width="455" height="155" rx="16" fill="#B3C3D0" stroke="#799DAC" stroke-width="1.6"/>
+<text x="857" y="179" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#21353F">Supabase Auth and Postgres</text>
+<text x="857" y="212" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Owner-scoped records and permissions</text>
+<text x="857" y="240" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Durable outbox, revisions and reports</text>
+<text x="857" y="268" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Session validation and database rules</text>
+<rect x="1340" y="145" width="410" height="155" rx="16" fill="#CCDBBB" stroke="#799DAC" stroke-width="1.6"/>
+<text x="1362" y="179" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#21353F">Saved result</text>
+<text x="1362" y="212" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Findings with source quotations</text>
+<text x="1362" y="240" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Unknowns remain visible</text>
+<text x="1362" y="268" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Permission-aware unsent draft</text>
+<path d="M355 220 H405" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)"/>
+<path d="M785 220 H835" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M1290 220 H1340" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)"/>
+<text x="1370" y="335" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#21353F">Shown in the personal workspace</text>
+<rect x="50" y="400" width="1250" height="620" rx="22" fill="#FFFCF7" stroke="#799DAC" stroke-width="2"/>
+<text x="80" y="440" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#21353F">AWS  /  DURABLE RESEARCH EXECUTION</text>
+<rect x="80" y="490" width="300" height="110" rx="16" fill="#EBD9AD" stroke="#799DAC" stroke-width="1.6"/>
+<text x="102" y="524" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#21353F">EventBridge</text>
+<text x="102" y="557" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Schedule: every minute</text>
+<rect x="80" y="665" width="300" height="140" rx="16" fill="#EBD9AD" stroke="#799DAC" stroke-width="1.6"/>
+<text x="102" y="699" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#21353F">Lambda dispatcher</text>
+<text x="102" y="732" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Claim one due job</text>
+<text x="102" y="760" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Temporary worker lease</text>
+<text x="102" y="788" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Invoke the agent</text>
+<path d="M230 600 V665" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)"/>
+<path d="M80 735 H65 V355 H1055 V300" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<text x="375" y="347" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#21353F">Claim due work from Postgres</text>
+<rect x="445" y="490" width="825" height="410" rx="20" fill="#EFF3F4" stroke="#355864" stroke-width="2"/>
+<text x="470" y="531" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#21353F">AMAZON BEDROCK AGENTCORE RUNTIME</text>
+<text x="470" y="561" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Python worker with guarded, bounded execution</text>
+<rect x="480" y="605" width="310" height="110" rx="16" fill="#FFFFFF" stroke="#799DAC" stroke-width="1.6"/>
+<text x="502" y="639" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#21353F">Load and guard</text>
+<text x="502" y="672" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Job context from Postgres</text>
+<text x="502" y="700" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Check lease and revision</text>
+<rect x="855" y="605" width="360" height="110" rx="16" fill="#B3C3D0" stroke="#799DAC" stroke-width="1.6"/>
+<text x="877" y="639" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#21353F">Python Strands agent</text>
+<text x="877" y="672" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Model → tools → model</text>
+<text x="877" y="700" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Structured research response</text>
+<rect x="1340" y="605" width="410" height="110" rx="16" fill="#CCDBBB" stroke="#799DAC" stroke-width="1.6"/>
+<text x="1362" y="639" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#21353F">Direct OpenAI API</text>
+<text x="1362" y="672" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">GPT-5.6 Luna</text>
+<text x="1362" y="700" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Inference outside AWS</text>
+<path d="M380 735 H420 V660 H480" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)"/>
+<text x="90" y="840" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#21353F">Invocation: job ID + lease only</text>
+<path d="M790 660 H855" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)"/>
+<path d="M1215 660 H1340" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<rect x="480" y="770" width="310" height="110" rx="16" fill="#FFFFFF" stroke="#799DAC" stroke-width="1.6"/>
+<text x="502" y="804" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#21353F">Validate and save</text>
+<text x="502" y="837" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Quotations and requirement IDs</text>
+<text x="502" y="865" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Final lease / revision check</text>
+<rect x="855" y="770" width="360" height="110" rx="16" fill="#FFFFFF" stroke="#799DAC" stroke-width="1.6"/>
+<text x="877" y="804" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#21353F">Scoped tools</text>
+<text x="877" y="837" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Fetch a bounded public page</text>
+<text x="877" y="865" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Draft from share-approved needs</text>
+<rect x="1340" y="770" width="410" height="110" rx="16" fill="#FFFFFF" stroke="#799DAC" stroke-width="1.6"/>
+<text x="1362" y="804" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#21353F">Public venue pages</text>
+<text x="1362" y="837" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Supplied venue origin</text>
+<text x="1362" y="865" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Private addresses blocked</text>
+<path d="M1035 715 V770" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M1215 820 H1340" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M855 687 H820 V820 H790" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)"/>
+<text x="811" y="747" font-family="Arial, sans-serif" font-size="17" font-weight="400" fill="#21353F">result</text>
+<path d="M1150 300 V490" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<text x="1170" y="365" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#21353F">Load context / save validated report</text>
+<text x="470" y="945" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#21353F">Recover expired leases • Bound retries • Stop cancelled or obsolete work</text>
+<text x="470" y="978" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">No external message is sent by this research flow.</text>
+<rect x="50" y="1055" width="370" height="145" rx="16" fill="#D9CCBA" stroke="#799DAC" stroke-width="1.6"/>
+<text x="72" y="1089" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#21353F">AWS Secrets Manager</text>
+<text x="72" y="1122" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Server credentials for</text>
+<text x="72" y="1150" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">dispatcher and runtime</text>
+<rect x="455" y="1055" width="370" height="145" rx="16" fill="#D9CCBA" stroke="#799DAC" stroke-width="1.6"/>
+<text x="477" y="1089" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#21353F">CloudWatch and ECR</text>
+<text x="477" y="1122" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Operational logs in CloudWatch</text>
+<text x="477" y="1150" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Agent image stored in ECR</text>
+<rect x="860" y="1055" width="890" height="145" rx="16" fill="#EBD9AD" stroke="#799DAC" stroke-width="1.6"/>
+<text x="882" y="1089" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#21353F">Separate browser demo</text>
+<text x="882" y="1122" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Example visits, simulated replies, a replayable tour and a demo companion.</text>
+<text x="882" y="1150" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Uses local browser state. It does not invoke the research model.</text>
+<path d="M235 1055 V1020" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)" stroke-dasharray="7 6"/>
+<path d="M640 1020 V1055" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)" marker-start="url(#arrow)" stroke-dasharray="7 6"/>
+<text x="50" y="1251" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#21353F">Deployment verified. A full hosted sign-in-to-report journey remains to be verified.</text>
+<text x="50" y="1282" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Future integrations: venue email and replies, follow-ups, maps, alternative search and Calendar.</text>
+</svg>

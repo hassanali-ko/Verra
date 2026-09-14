@@ -38,7 +38,7 @@ You describe what you need once. You choose a place you want to visit. You decid
 
 That last step is where the current build stops. The draft is written and waiting. It is not sent.
 
-**What is built but not connected yet**
+**What we are building next**
 
 6. Sending that message to the venue.
 7. Watching for the reply and pulling the answer out of it.
@@ -83,23 +83,11 @@ Sign-in email is rate limited on a shared sender, so the demo is the reliable wa
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    Browser[Your browser] --> Next[Next.js on Vercel]
-    Next --> Auth[Supabase Auth]
-    Next --> RPC[Postgres functions: ownership and validation]
-    RPC --> Records[(Profile, visits, requirements, permissions)]
-    RPC --> Outbox[(Durable job queue)]
-    Outbox --> Lambda[Scheduled Lambda dispatcher]
-    Lambda --> Agent[Python Strands on AgentCore]
-    Agent --> Luna[GPT-5.6 Luna]
-    Agent --> Pages[Guarded public page retrieval]
-    Agent --> Reports[(Findings, with sources)]
-    Agent -. not connected .-> Mail[Venue email]
-    Agent -. not connected .-> Cal[Calendar]
-```
+![Verra research architecture](docs/architecture.png)
 
-Solid lines are deployed and running. Dashed lines are designed and not connected.
+[Architecture details and Mermaid source](docs/architecture.md) · [Scalable diagram](docs/architecture.svg)
+
+The diagram shows the deployed research architecture and implemented code paths. AgentCore and the scheduled dispatcher are deployed; the complete hosted sign-in-to-report journey still needs verification. The browser demo is separate, and venue email and Calendar are future integrations.
 
 The important part is that nothing depends on a process staying alive. A request is written to Postgres inside a transaction along with its job. The dispatcher claims that job with a lease. If the agent dies mid-run, the lease expires and the work is reclaimed, and the old lease token is rejected so a late result cannot overwrite a newer one. Cancelling a visit invalidates queued work rather than hoping nothing has started.
 
