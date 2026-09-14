@@ -8,17 +8,9 @@
 
 .revision-entry{padding:1rem 0;border-bottom:1px solid var(--line)}.revision-entry summary{cursor:pointer;font-weight:650}.revision-entry li{margin:.65rem 0}.visit-form fieldset:disabled{opacity:.8}
 
-/* Pipster's logo. The original reads on dark surfaces; a deepened variant
-   reads on the ivory canvas, where the pale letters would otherwise vanish. */
+/* One logo artwork, used unchanged on both themes. */
 .brandmark{display:inline-flex;align-items:center;line-height:0}
 .brandmark img{display:block;width:auto;height:100%}
-.brandmark .on-dark{display:none}
-:root[data-theme=dark] .brandmark .on-light{display:none}
-:root[data-theme=dark] .brandmark .on-dark{display:block}
-@media(prefers-color-scheme:dark){
-  :root:not([data-theme=light]) .brandmark .on-light{display:none}
-  :root:not([data-theme=light]) .brandmark .on-dark{display:block}
-}
 .brand .brandmark{font:inherit;height:auto}
 .brand .brandmark img{height:auto;width:104px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
