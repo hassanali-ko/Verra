@@ -11,7 +11,7 @@ test('landing leads into an account-free judge flow with scoped decisions and pe
  await page.getByRole('button',{name:'Pause',exact:true}).click();await expect(page.getByRole('button',{name:'Load example reply'})).toHaveCount(0);await page.getByRole('button',{name:'Resume',exact:true}).click();await page.getByRole('button',{name:'Load example reply'}).click();
  await page.getByRole('button',{name:'Review visit plan'}).click();await expect(page.getByRole('heading',{name:'Your visit plan'})).toBeVisible();await expect(page.getByText('A quieter arrival time is still unconfirmed.',{exact:false})).toBeVisible();
  await page.reload();await expect(page.getByRole('heading',{name:'Your visit plan'})).toBeVisible();
- const download=page.waitForEvent('download');await page.getByRole('button',{name:'Download sample plan'}).click();expect((await download).suggestedFilename()).toBe('verra-sample-plan.json');
+ const download=page.waitForEvent('download');await page.getByRole('button',{name:'Download sample plan'}).click();expect((await download).suggestedFilename()).toBe('verra-sample-plan.txt');
  page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Cancel arrangement'}).click();await expect(page.getByRole('status')).toContainText('sharing permission is revoked');await page.getByRole('button',{name:'Access needs',exact:true}).last().click();for(const box of await page.getByLabel('May be shared in this sample arrangement').all()){await expect(box).not.toBeChecked();await expect(box).toBeDisabled();}
  page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Reset demo',exact:true}).click();await expect(page.getByRole('heading',{name:'Good plans start here.'})).toBeVisible();expect(protectedCalls).toEqual([]);
 });
