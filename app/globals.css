@@ -16,3 +16,7 @@
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .mini-brand.brandmark{height:auto}
 .mini-brand.brandmark img{height:auto;width:98px}
+.signin-demo.lead{border-color:var(--strong-line);background:var(--raised)}
+.signin-demo.lead .button{margin-top:12px;width:100%}
+.signin-or{display:flex;align-items:center;gap:12px;margin:22px 0 18px;color:var(--muted);font-size:.8rem}
+.signin-or::before,.signin-or::after{content:"";flex:1;height:1px;background:var(--line)}
