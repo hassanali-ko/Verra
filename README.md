@@ -18,6 +18,7 @@ Working locally:
 - Revisioned visit editing for dates, venue/contact, needs and sharing, with previous details kept privately. Changes stop old jobs; stale edits cannot overwrite newer saves. Uncertain saves retry the same request.
 - Unsaved form protection, failed-save preservation and periodic refresh.
 - Fixed mobile workspace navigation with a More sheet, sticky form save actions and a visit shortcut that moves focus to the next-step panel without approving anything. The shortcut hides while that panel is in view.
+- Visible Accessibility controls with on-device read-aloud, pause/stop, stronger contrast, colour-independent status shapes and borders, and underlined links. Reading skips form inputs and stops after content/navigation changes. Browsers without a local voice show an unavailable state.
 - Device-only Calm mode and independent larger-text, reduced-motion and quiet-layout preferences, available throughout the website and both workspaces. Preferences persist under `verra-reading-preferences` and apply before paint. They never change requirements, evidence, decisions or permissions. System reduced-motion preferences are also respected.
 
 The research worker, bounded public-page retrieval, source-quotation validation, durable lease/retry processing, saved findings and an unsent inquiry draft are implemented. Local verification uses real Python/SQL integration with controlled page/model test doubles and explicit synthetic result labels. A configured worker must process queued checks. Direct Luna access and one end-to-end public-page research case passed on September 13, 2026. The actual worker persisted findings through local SQL and displayed them in the app, keeping an unsupported workshop route unknown. AgentCore deployment and hosted recovery are not yet verified. Maps, real venue correspondence, reply processing, follow-ups, alternative search and Calendar remain unimplemented. No real messages are sent by the local preview.
@@ -30,9 +31,11 @@ Open `/demo` directly from the landing page. No account or local account launche
 
 The judge workspace includes three fictional arrangements with scoped evidence, alternative approval/rejection, explicitly loaded sample replies, sample plans, pause/cancel, reusable sample needs, custom sample creation, search and filters. Demo state is validated before loading and stored only under `verra-judge-demo-v1` in this browser. Reset affects that key's sample state only. It never calls protected account APIs or external providers.
 
+The demo offers a first-entry tour with Skip, Back and Replay controls. The tour changes only which part of the interface is shown; it never resets visits or approves an action. A scenario-aware companion accepts suggested or typed questions about evidence, sharing and next steps. Its answers are computed from the selected demo visit in the browser, not a live model invocation.
+
 Prepared scenarios can advance from a decision to a sample plan. A custom sample visit has no prepared venue reply and cannot fabricate a plan. Approval requires sharing permission for the needs covered by the sample proposal. Paused/cancelled samples cannot advance replies. These checks exercise demo logic, not live agent tools.
 
-The demo is explicitly a simulation. Its source excerpts, messages and outcomes are fictional. The real product backlog remains required work, and live provider behavior must be verified independently.
+A concise demo explanation and example-source labels identify the simulation. Its source excerpts, messages and outcomes are fictional. The real product backlog remains required work, and live provider behavior must be verified independently.
 
 ## Run locally
 
@@ -153,3 +156,9 @@ Automated tests cover the database rules, the running Next.js routes, the Python
 - **Accessibility.** Automated WCAG A/AA and overflow checks at 320px, 390px and 1440px in both themes, covering the mobile navigation, reachable save actions, focus restoration and the reading preferences.
 
 Not yet verified: hosted Supabase Auth and email delivery, any deployed AWS component, real correspondence, calendar connections, and testing with assistive technology on physical devices. Local test results do not establish any of these.
+
+## Reading and guidance controls
+
+Reading preferences are device-scoped and migrate existing Calm settings without changing visit data. Stronger contrast and colour-blind support are independent from Calm, and toggling Calm preserves those choices. Brand artwork keeps its original colours. Short entrance/interaction animations stop under either the system reduced-motion preference or the app’s Less motion setting.
+
+Read-aloud uses the browser Speech Synthesis API and filters voices by `localService`. It starts only on request, offers speed/voice selection, and provides reachable pause, resume and stop controls. No text is sent to a speech API by the application. Voice availability and audible quality depend on the browser/device; automated checks use a controlled speech adapter and do not establish physical-device audio quality. See [local voice behaviour](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice/localService) and [colour-independent information](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color).
