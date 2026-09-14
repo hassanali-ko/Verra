@@ -35,6 +35,7 @@ You describe what you need once. You choose a place you want to visit. You decid
 3. It saves each finding with the quote and the source it came from, so you can see exactly where an answer came from.
 4. Anything it cannot confirm stays marked unknown. It does not round up to "accessible".
 5. Where a question is still open, it drafts the message that would need to go to the venue, and shows it to you for approval.
+6. You can send that message yourself in one click. Verra opens your own email app with the question written out and copies it to your clipboard.
 
 The draft is written and shown to you for approval. In the demo you can approve it and load an example reply to see what happens next. Live sending to a real venue is the next integration.
 
@@ -73,7 +74,7 @@ Honest status, because this is a hackathon build and not a finished service.
 
 **Simulated in the demo, not connected to live services**
 
-- Venue replies and follow-ups. The demo loads example replies you control, so you can see how an answer changes a requirement.
+- Venue replies and follow-ups. The demo loads example replies you control, so you can see how an answer changes a requirement. Verra writes the outgoing question for you; sending it from your own email is one click, and sending it automatically is next.
 - Calendar. The visit downloads as a standard `.ics` file you can open in any calendar app. Verra does not connect to a calendar account.
 - Maps, alternative venue search and notifications.
 

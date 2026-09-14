@@ -20,3 +20,4 @@
 .signin-demo.lead .button{margin-top:12px;width:100%}
 .signin-or{display:flex;align-items:center;gap:12px;margin:22px 0 18px;color:var(--muted);font-size:.8rem}
 .signin-or::before,.signin-or::after{content:"";flex:1;height:1px;background:var(--line)}
+.send-yourself{width:100%;margin-top:8px}
