@@ -36,7 +36,7 @@ You describe what you need once. You choose a place you want to visit. You decid
 4. Anything it cannot confirm stays marked unknown. It does not round up to "accessible".
 5. Where a question is still open, it drafts the message that would need to go to the venue, and shows it to you for approval.
 
-That last step is where the current build stops. The draft is written and waiting. It is not sent.
+The draft is written and shown to you for approval. In the demo you can approve it and load an example reply to see what happens next. Live sending to a real venue is the next integration.
 
 **What we are building next**
 
@@ -71,13 +71,11 @@ Honest status, because this is a hackathon build and not a finished service.
 - Bounded page retrieval that refuses private addresses and oversized responses, and validates that a quotation actually appears in the source.
 - Accessibility controls: read-aloud, stronger contrast, status shapes that do not rely on colour, larger text, reduced motion, and a Calm mode.
 
-**Not working yet**
+**Simulated in the demo, not connected to live services**
 
-- Sending and receiving venue email.
-- Reading replies and following up.
-- Calendar connection.
-- Maps and alternative venue search.
-- Notifications.
+- Venue replies and follow-ups. The demo loads example replies you control, so you can see how an answer changes a requirement.
+- Calendar. The visit downloads as a standard `.ics` file you can open in any calendar app. Verra does not connect to a calendar account.
+- Maps, alternative venue search and notifications.
 
 Sign-in email is rate limited on a shared sender, so the demo is the reliable way in during judging.
 
