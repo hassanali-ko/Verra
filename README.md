@@ -136,14 +136,7 @@ npm run test:browser
 
 All test data uses invented people and `example.org` addresses.
 
-## Connecting real services
-
-1. Create a Supabase project and apply `supabase/migrations/001_arrangements.sql`, then `002_agent_research.sql`, then `003_arrangement_edits.sql`, once each and in that order.
-2. Copy `.env.example` to `.env.local` and set `SUPABASE_PRODUCT_URL`, `SUPABASE_PRODUCT_KEY` (the publishable or anon key, never the service role key) and `VERRA_ORIGIN`.
-3. In Supabase, set the site URL and allow `<your-origin>/auth/callback` as a redirect. Enable email login and configure a real SMTP sender.
-4. For the agent and the AWS side, see [agent/README.md](agent/README.md) and [infra/README.md](infra/README.md).
-
-`VERRA_ORIGIN` must exactly match the origin people open the app on. If it does not, reads will work and every save will be refused.
+To point it at real services, see [agent/README.md](agent/README.md) for the agent and [infra/README.md](infra/README.md) for the AWS side.
 
 ## What has been tested
 
@@ -155,12 +148,6 @@ All test data uses invented people and `example.org` addresses.
 - **Accessibility.** Automated WCAG A/AA and overflow checks at 320px, 390px and 1440px in both themes.
 
 Not yet verified: a full journey on the deployed stack from sign-up to saved report, hosted email delivery, and testing with real assistive technology on physical devices. We have not done user testing with disabled people yet, which is the first thing we want to fix.
-
-## What we are not claiming
-
-Verra does not certify that a place is accessible. It reports what a venue said, where that came from, and when. A confirmed answer can still be that your need cannot be met, and that is a useful answer.
-
-We are not the first people to work on this. AccessNow and Euan's Guide have been doing it longer. What we think is different here is handling one arrangement over time, rather than showing a directory entry.
 
 ## Licence
 
