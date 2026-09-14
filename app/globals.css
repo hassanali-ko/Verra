@@ -12,7 +12,7 @@
 .brandmark{display:inline-flex;align-items:center;line-height:0}
 .brandmark img{display:block;width:auto;height:100%}
 .brand .brandmark{font:inherit;height:auto}
-.brand .brandmark img{height:auto;width:104px}
+.brand .brandmark img{height:auto;width:134px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .mini-brand.brandmark{height:auto}
-.mini-brand.brandmark img{height:auto;width:78px}
+.mini-brand.brandmark img{height:auto;width:98px}

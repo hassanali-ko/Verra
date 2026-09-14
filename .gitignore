@@ -55,3 +55,4 @@ infra/runtime.local.json
 infra/runtime.*.local.json
 samconfig.toml
 .aws-sam/
+VERRA_WORKER_KEY
