@@ -18,7 +18,11 @@ Resources:
       Runtime: python3.12
       Timeout: 240
       MemorySize: 256
-      ReservedConcurrentExecutions: 2
+      # Reserving concurrency needs an account whose total limit is above 10.
+      # A new account starts at 10, and reserving any of it is rejected. The
+      # once-a-minute schedule and one-job-per-invocation handler already bound
+      # throughput; restore this on an account with a raised limit.
+      # ReservedConcurrentExecutions: 2
       Environment:
         Variables:
           SUPABASE_PRODUCT_URL: !Ref ProductDatabaseUrl
