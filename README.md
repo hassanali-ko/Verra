@@ -1,45 +1,113 @@
 # Verra
 
-Verra is being built to handle the questions and follow-through needed to arrange accessible visits. People describe functional needs, choose what may be shared, and keep each visit's requirements, evidence and next steps together. A statement about an entrance must never become a claim about the whole visit.
+**Live app:** https://theverra.vercel.app · **No account needed:** [open the judge demo](https://theverra.vercel.app/demo)
 
-## Implementation status
+## How Verra started
 
-The product foundation and expanded website are implemented and locally verified. An account-free judge workspace now provides a separate interactive simulation of the coordination journey. The research worker now runs locally against the real Luna API. The complete product and hosted service remain unfinished.
+Verra began with a frustration that bothered us for a long time. We noticed how much effort disabled people must put in just to leave home. Attending a local workshop or simply going for a coffee should not feel like a part-time job. Sadly, for people with disabilities, it often is.
 
-Working locally:
+After speaking with friends who use mobility aids, we found out that websites rarely list accessibility details. They have to call venues, wait on hold, and ask repetitive questions about ramps, elevators, or bathroom dimensions. Even after all this, a ramp might exist at the back door but stay locked. Or the building might have an elevator, but the restrooms are too difficult to navigate. This is a very draining burden.
 
-- Full landing page with interactive visit examples, in-product previews, journey explanation, privacy section, FAQ and direct judge-demo entry.
-- Responsive personal workspace with overview, status filters, activity, access needs, settings and a protected personal export. Shared product navigation and remembered light/dark themes use Verra's approved palette.
-- Personal Supabase session validation, email-link sign-in routes, callback and sign-out. Actual email delivery and hosted account recovery still require provider verification.
-- Saved functional needs, reused privately when creating another visit.
-- Visit creation with category, date, timezone, venue/contact, individual hard requirements/preferences and per-need sharing choices.
-- Account-isolated records, visit search, requirement states, history and durable database storage.
-- Transactional work acceptance, idempotent creation and queue retries, revision checks, pause/resume and cancellation that stops queued work and revokes outreach.
-- Revisioned visit editing for dates, venue/contact, needs and sharing, with previous details kept privately. Changes stop old jobs; stale edits cannot overwrite newer saves. Uncertain saves retry the same request.
-- Unsaved form protection, failed-save preservation and periodic refresh.
-- Fixed mobile workspace navigation with a More sheet, sticky form save actions and a visit shortcut that moves focus to the next-step panel without approving anything. The shortcut hides while that panel is in view.
-- Visible Accessibility controls with on-device read-aloud, pause/stop, stronger contrast, colour-independent status shapes and borders, and underlined links. Reading skips form inputs and stops after content/navigation changes. Browsers without a local voice show an unavailable state.
-- Device-only Calm mode and independent larger-text, reduced-motion and quiet-layout preferences, available throughout the website and both workspaces. Preferences persist under `verra-reading-preferences` and apply before paint. They never change requirements, evidence, decisions or permissions. System reduced-motion preferences are also respected.
+We wanted to build something that takes this headache away. This tedious problem is exactly what AI agents are built to solve. The hackathon gave us the tools and the push to start on it.
 
-The research worker, bounded public-page retrieval, source-quotation validation, durable lease/retry processing, saved findings and an unsent inquiry draft are implemented. Local verification uses real Python/SQL integration with controlled page/model test doubles and explicit synthetic result labels. A configured worker must process queued checks. Direct Luna access and one end-to-end public-page research case passed on September 13, 2026. The actual worker persisted findings through local SQL and displayed them in the app, keeping an unsupported workshop route unknown. AgentCore deployment and hosted recovery are not yet verified. Maps, real venue correspondence, reply processing, follow-ups, alternative search and Calendar remain unimplemented. No real messages are sent by the local preview.
+## What is Verra?
 
-The implemented provider path is direct OpenAI GPT-5.6 Luna through Python Strands, with an AgentCore runtime entry point and scheduled AWS dispatcher. OpenAI model billing requires an OpenAI-issued key, separately from AWS hosting. There is no automatic model fallback. See the [agent setup](agent/README.md) and [AWS deployment instructions](infra/README.md). Live model access is verified locally; cloud hosting remains pending.
+Verra is a personalized accessibility companion. It works from live sources rather than an outdated crowd-sourced database, and it checks against the needs you actually wrote down instead of a generic accessibility label.
 
-## Explore the judge experience
+An entrance tells you almost nothing about the rest of a visit. So Verra keeps every requirement separate, records where each answer came from, and refuses to mark a visit settled while something important is still unknown.
 
-Open `/demo` directly from the landing page. No account or local account launcher is needed. The judge guide is at `/judges`, and `/privacy` explains the development data boundary.
+Built for the Everyday Agents track.
 
-The judge workspace includes three fictional arrangements with scoped evidence, alternative approval/rejection, explicitly loaded sample replies, sample plans, pause/cancel, reusable sample needs, custom sample creation, search and filters. Demo state is validated before loading and stored only under `verra-judge-demo-v1` in this browser. Reset affects that key's sample state only. It never calls protected account APIs or external providers.
+## Who is it for?
 
-The demo offers a first-entry tour with Skip, Back and Replay controls. The tour changes only which part of the interface is shown; it never resets visits or approves an action. A scenario-aware companion accepts suggested or typed questions about evidence, sharing and next steps. Its answers are computed from the selected demo visit in the browser, not a live model invocation.
+Verra is designed for anyone with a disability or mobility constraint. That includes wheelchair users, people relying on mobility aids, and anyone who needs specific accommodations like zero-step entries or wide doorways.
 
-Prepared scenarios can advance from a decision to a sample plan. A custom sample visit has no prepared venue reply and cannot fabricate a plan. Approval requires sharing permission for the needs covered by the sample proposal. Paused/cancelled samples cannot advance replies. These checks exercise demo logic, not live agent tools.
+It is also a tool for caregivers, parents of disabled children, and event coordinators who want their chosen venues to safely accommodate their guests. Verra is for people who refuse to let missing information decide where they can go.
 
-A concise demo explanation and example-source labels identify the simulation. Its source excerpts, messages and outcomes are fictional. The real product backlog remains required work, and live provider behavior must be verified independently.
+## How does Verra work?
 
-## Run locally
+You describe what you need once. You choose a place you want to visit. You decide what may be shared. Verra takes it from there.
 
-Use Node.js 22 or later and npm. Versions are pinned in the lockfile.
+**What it does today**
+
+1. Verra reads the venue's public pages, looking for accessibility information.
+2. It checks what it finds against your specific requirements, one at a time.
+3. It saves each finding with the quote and the source it came from, so you can see exactly where an answer came from.
+4. Anything it cannot confirm stays marked unknown. It does not round up to "accessible".
+5. Where a question is still open, it drafts the message that would need to go to the venue, and shows it to you for approval.
+
+That last step is where the current build stops. The draft is written and waiting. It is not sent.
+
+**What is built but not connected yet**
+
+6. Sending that message to the venue.
+7. Watching for the reply and pulling the answer out of it.
+8. Following up when nobody responds.
+9. Adding the confirmed visit to your calendar.
+
+We are being deliberate about this. The research, the evidence handling and the drafting are real and running against a live model. Outbound email is not, and we would rather say so than let a demo imply otherwise. Every one of those steps has a designed place in the system, and the queue, permissions and cancellation logic behind them already work.
+
+## Try it without signing up
+
+Open [`/demo`](https://theverra.vercel.app/demo). No account, no email, nothing sent anywhere.
+
+It opens the full workspace with example visits, including the one we kept coming back to: a pottery class where the entrance is step-free but the classroom is upstairs and the lift is out of service. You can approve a question, load an example reply, watch the requirement change state, and pause or cancel the whole thing.
+
+Everything in the demo is fictional and clearly labelled. No venue is ever contacted.
+
+## What is actually working
+
+Honest status, because this is a hackathon build and not a finished service.
+
+**Working and deployed**
+
+- Public site, personal workspace and the account-free demo.
+- Accounts, sessions, and records that stay isolated per person.
+- A reusable access profile. Write your needs once, reuse them on every visit.
+- Visit creation with each requirement marked hard or preferred, and per-requirement sharing permission.
+- Revisioned editing. Change a date or a venue and the old details are kept, old jobs stop, and a stale edit cannot overwrite a newer one.
+- Pause, resume and cancel, which really do stop queued work.
+- The research agent, running on AWS AgentCore against GPT-5.6 Luna, with a scheduled dispatcher claiming work once a minute.
+- Bounded page retrieval that refuses private addresses and oversized responses, and validates that a quotation actually appears in the source.
+- Accessibility controls: read-aloud, stronger contrast, status shapes that do not rely on colour, larger text, reduced motion, and a Calm mode.
+
+**Not working yet**
+
+- Sending and receiving venue email.
+- Reading replies and following up.
+- Calendar connection.
+- Maps and alternative venue search.
+- Notifications.
+
+Sign-in email is rate limited on a shared sender, so the demo is the reliable way in during judging.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    Browser[Your browser] --> Next[Next.js on Vercel]
+    Next --> Auth[Supabase Auth]
+    Next --> RPC[Postgres functions: ownership and validation]
+    RPC --> Records[(Profile, visits, requirements, permissions)]
+    RPC --> Outbox[(Durable job queue)]
+    Outbox --> Lambda[Scheduled Lambda dispatcher]
+    Lambda --> Agent[Python Strands on AgentCore]
+    Agent --> Luna[GPT-5.6 Luna]
+    Agent --> Pages[Guarded public page retrieval]
+    Agent --> Reports[(Findings, with sources)]
+    Agent -. not connected .-> Mail[Venue email]
+    Agent -. not connected .-> Cal[Calendar]
+```
+
+Solid lines are deployed and running. Dashed lines are designed and not connected.
+
+The important part is that nothing depends on a process staying alive. A request is written to Postgres inside a transaction along with its job. The dispatcher claims that job with a lease. If the agent dies mid-run, the lease expires and the work is reclaimed, and the old lease token is rejected so a late result cannot overwrite a newer one. Cancelling a visit invalidates queued work rather than hoping nothing has started.
+
+Ownership is decided in SQL from the authenticated user, not passed in by the browser. A client cannot choose whose records it touches.
+
+## Run it locally
+
+Node.js 22 or newer.
 
 ```sh
 npm ci
@@ -48,117 +116,52 @@ npm run build
 npm run preview:local
 ```
 
-Open http://127.0.0.1:3121 to select a synthetic local account. The actual Next.js app runs at http://127.0.0.1:3120. The test transport at port 3121 emulates only the Auth user endpoint and the listed database functions. It executes the real SQL in PGlite and persists data in ignored `.local-data/preview/`.
+Open http://127.0.0.1:3121 to pick a test account. The app itself runs on port 3120. The test service runs real SQL against a local database, sends no email and runs no agent.
 
-This transport uses non-production test tokens, binds only to loopback and is excluded from deployment. It does not verify Supabase's hosted Auth, SMTP, PKCE exchange, token refresh or account recovery.
+For the Python agent:
 
-Run browser checks while the local preview is running:
+```sh
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r agent/requirements.lock.txt
+.venv/bin/python -m pip install --no-deps -e ./agent
+.venv/bin/python -m pytest agent/tests -q
+```
+
+Browser checks, with the preview running:
 
 ```sh
 npx playwright install chromium
 npm run test:browser
-npm run typecheck
 ```
 
-Tests use synthetic people and `example.org`/`example.test` contacts. Database tests create an isolated temporary database and remove it afterward. Browser tests add clearly synthetic records to the local preview accounts. Screenshots stay in ignored `test-results/`.
+All test data uses invented people and `example.org` addresses.
 
-## Connect the product service
+## Connecting real services
 
-1. Create a dedicated Supabase product project with Auth enabled. Apply `001_arrangements.sql`, then `002_agent_research.sql`, then `003_arrangement_edits.sql`, once each and in that order.
-2. Copy `.env.example` to `.env.local`. Set `SUPABASE_PRODUCT_URL`, the project's **publishable or anon key** in `SUPABASE_PRODUCT_KEY`, and the exact `VERRA_ORIGIN`. Do not use a service-role key for user requests. Session JWTs supply the authenticated user's identity and database role.
-3. Configure Supabase's site URL and allow the exact `/auth/callback` redirect URL. Enable email login and configure a verified sender. Email links must use the supported Supabase PKCE flow or a token-hash link to `/auth/callback`; test the actual template before release.
-4. Run `npm run dev` or build and run `npm start`. Without settings, sign-in displays a connection-pending state and protected routes reject access.
-5. For Vercel, use this directory as the project root and set the same values for the deployed HTTPS origin.
-6. On the deployed domain, check signup, email delivery, callback, refresh, expiry, sign-out and account isolation with two real accounts.
+1. Create a Supabase project and apply `supabase/migrations/001_arrangements.sql`, then `002_agent_research.sql`, then `003_arrangement_edits.sql`, once each and in that order.
+2. Copy `.env.example` to `.env.local` and set `SUPABASE_PRODUCT_URL`, `SUPABASE_PRODUCT_KEY` (the publishable or anon key, never the service role key) and `VERRA_ORIGIN`.
+3. In Supabase, set the site URL and allow `<your-origin>/auth/callback` as a redirect. Enable email login and configure a real SMTP sender.
+4. For the agent and the AWS side, see [agent/README.md](agent/README.md) and [infra/README.md](infra/README.md).
 
-
-## Current architecture
-
-```mermaid
-flowchart LR
-    Browser[Personal browser] --> Next[Next.js pages and routes]
-    Next --> Auth[Supabase Auth: validate user]
-    Next --> RPC[Postgres functions: ownership and validation]
-    RPC --> Records[(Profiles, cases, requirements, permissions)]
-    RPC --> Audit[(Case events)]
-    RPC --> Outbox[(Durable outbox jobs)]
-    Outbox --> Worker[Guarded research worker]
-    Worker --> Reports[(Source findings and unsent drafts)]
-    Reports --> Next
-    Outbox -. deployment pending .-> Dispatch[EventBridge and Lambda]
-    Dispatch -. deployment pending .-> Agent[Strands on AgentCore]
-    Worker --> Model[Direct OpenAI Luna: locally verified]
-    Agent --> Worker
-```
-
-Solid connections represent implemented code paths. Dashed connections require live configuration and deployment verification. PGlite supplies the database boundary during local verification, not the hosted services.
-
-Each protected request validates the session with Auth. SQL functions derive ownership from `auth.uid()`; clients cannot choose an owner. RLS permits authenticated users to read only their own rows. Anonymous users cannot read application tables or invoke protected functions. User writes go through explicitly granted functions instead of direct table writes.
-
-Visit creation stores requirements and permissions in one transaction. An `Idempotency-Key` UUID makes retries return the original visit; reuse with changed data is rejected. Start requests persist an outbox job and state revision before returning HTTP 202. Repeating the same work request returns its original job. Pause and cancellation invalidate queued/claimed jobs. Resume does not silently restart work.
-
-Migration 002 implements worker leases, bounded retries/backoff, recovery, case revision fencing, owner-only research reports and completion deduplication. The Python worker rechecks active work at tool/model boundaries and before saving. Browser snapshots and direct table permissions exclude lease capabilities. External sending remains disconnected; provider-effect deduplication and uncertain-send reconciliation must be implemented before enabling it. Cancellation cannot undo an external action already accepted by a provider.
-
-Migration 003 adds owner-only revision history and edit receipts, requires fresh sharing review for a changed venue/contact, and captures original requirement wording with every report. Content versions are separate from work-state versions. Edits mark earlier research clearly and remove its draft-copy action; they never silently restart a check. Changed requirements are reopened while unaffected requirement states remain intact. A changed visit context reopens all affected checks.
-
-## Current routes
-
-| Route | Behavior |
-|---|---|
-| `POST /auth/signin` | Request a personal email link |
-| `GET /auth/callback` | Exchange a login code or verify an email token hash |
-| `POST /auth/signout` | Revoke the current Auth session |
-| `GET /api/snapshot` | Read the signed-in person's workspace |
-| `GET /api/export` | Download an account-isolated personal data export |
-| `POST /api/profile` | Save optional name and functional needs |
-| `POST /api/cases` | Create a visit with an `Idempotency-Key` header |
-| `PATCH /api/cases/:id` | Save `{version, visit, recipientReviewed}` with an `Idempotency-Key`; preserve prior details and stop obsolete work |
-| `POST /api/cases/:id/start` | Persist work using `{version, requestKey}` |
-| `POST /api/cases/:id/control` | Apply `{version, action}` for pause, resume or cancel |
-
-All writes require the configured same-origin header. Errors do not expose raw database details. Protected responses are not cacheable. Input and response contracts live in `lib/contracts.ts`; authoritative constraints and access rules live in the migration.
-
-## Complete product roadmap
-
-These are the journeys Verra is being built to cover. The table shows what is still missing in each one.
-
-| Journey | Remaining work |
-|---|---|
-| Public website | Real-world verified examples, user feedback and complete help |
-| Account | Hosted signup verification, recovery, settings, session-expiry UX |
-| Access profile | Reusable classifications, revisioned edits and richer consent controls |
-| New arrangement | Time/flexible windows and communication preferences; revisioned date/venue/needs/sharing edits are implemented |
-| Multiple arrangements | Archive, direct personal-case links and revisit controls |
-| Venue research | Hosted provider verification, broader source coverage and adversarial semantic evaluations; guarded retrieval and saved source quotations are implemented |
-| Correspondence | Real send/receive, correlation, delivery status and permitted follow-ups |
-| Decisions | Contextual approval, editing, rejection and recorded consequences |
-| Evidence | Richer revision/change histories and verified replies; research reports already preserve source dates and quotations |
-| Alternatives | Supported alternatives that preserve hard requirements |
-| Confirmed plan | Verified arrival details, uncertainties and actual calendar connection |
-| Changes | Reopen affected checks and dependent actions after edits or new evidence |
-| Return visits | Reuse old context while requiring fresh confirmation where needed |
-| Companions | Case-scoped invitations, revocation and audit history |
-| Notifications | Useful updates, quiet hours and cancellation-aware delivery |
-| Data control | Deletion, integration disconnection and published retention; owner-only export is implemented |
-| Help and recovery | Hosted recovery verification and richer user handback; bounded research retry/failure handling is implemented |
-
-Next up are hosted research verification, permitted correspondence and richer evidence decisions. Runtime prompts, tools, migrations, tests and deployment templates are in `agent/` and `infra/`.
+`VERRA_ORIGIN` must exactly match the origin people open the app on. If it does not, reads will work and every save will be refused.
 
 ## What has been tested
 
-Automated tests cover the database rules, the running Next.js routes, the Python agent and the browser journeys.
+- **Isolation.** Real SQL checks that an account reads only its own rows, that anonymous and cross-account access are refused, and that direct table writes are rejected.
+- **Durability.** Duplicate submissions and retries return the original record, stale revisions are rejected, data survives a database restart, and cancelling stops queued work.
+- **Routes.** The production build runs against a local transport to check sessions, origin rejection, validation and two-account isolation.
+- **Agent.** Python tests cover retrieval limits, grounded quotations, mismatch handling and permission-aware drafting. Database tests cover lease ownership, stale results, replay prevention and retry exhaustion.
+- **Browser.** Needs, visits, queue, pause, resume, cancel, edit, reload and sign out, plus a research journey reviewed end to end.
+- **Accessibility.** Automated WCAG A/AA and overflow checks at 320px, 390px and 1440px in both themes.
 
-- **Data isolation.** Real SQL checks confirm an account reads only its own rows, cross-account and anonymous access are refused, direct table writes are rejected, and permissions are stored scoped to the requirement they belong to.
-- **Durability.** Duplicate creation and retried work return the original record, stale revisions are rejected, data survives a database restart, and pause and cancellation stop queued work and revoke pending outreach.
-- **Routes.** The production build runs against a loopback test transport to check session validation, origin rejection, input validation, private caching and two-account isolation.
-- **Agent.** Python checks cover retrieval restrictions, grounded quotations, mismatch handling, permission-aware drafting and the AgentCore input contract. Database checks cover lease ownership, stale and cancelled results, replay prevention, retry exhaustion and report isolation.
-- **Browser journeys.** Saved needs, private defaults, unsaved form protection, create, queue, pause, resume, cancel, edit, reload and sign out. The research journey runs the real worker against synthetic source and model doubles, then reviews the saved report.
-- **Accessibility.** Automated WCAG A/AA and overflow checks at 320px, 390px and 1440px in both themes, covering the mobile navigation, reachable save actions, focus restoration and the reading preferences.
+Not yet verified: a full journey on the deployed stack from sign-up to saved report, hosted email delivery, and testing with real assistive technology on physical devices. We have not done user testing with disabled people yet, which is the first thing we want to fix.
 
-Not yet verified: hosted Supabase Auth and email delivery, any deployed AWS component, real correspondence, calendar connections, and testing with assistive technology on physical devices. Local test results do not establish any of these.
+## What we are not claiming
 
-## Reading and guidance controls
+Verra does not certify that a place is accessible. It reports what a venue said, where that came from, and when. A confirmed answer can still be that your need cannot be met, and that is a useful answer.
 
-Reading preferences are device-scoped and migrate existing Calm settings without changing visit data. Stronger contrast and colour-blind support are independent from Calm, and toggling Calm preserves those choices. Brand artwork keeps its original colours. Short entrance/interaction animations stop under either the system reduced-motion preference or the app’s Less motion setting.
+We are not the first people to work on this. AccessNow and Euan's Guide have been doing it longer. What we think is different here is handling one arrangement over time, rather than showing a directory entry.
 
-Read-aloud uses the browser Speech Synthesis API and filters voices by `localService`. It starts only on request, offers speed/voice selection, and provides reachable pause, resume and stop controls. No text is sent to a speech API by the application. Voice availability and audible quality depend on the browser/device; automated checks use a controlled speech adapter and do not establish physical-device audio quality. See [local voice behaviour](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice/localService) and [colour-independent information](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color).
+## Licence
+
+MIT. See [LICENSE](LICENSE).
