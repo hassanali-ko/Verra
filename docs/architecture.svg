@@ -94,6 +94,5 @@
 <text x="882" y="1150" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Uses local browser state. It does not invoke the research model.</text>
 <path d="M235 1055 V1020" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)" stroke-dasharray="7 6"/>
 <path d="M640 1020 V1055" fill="none" stroke="#355864" stroke-width="2.6" marker-end="url(#arrow)" marker-start="url(#arrow)" stroke-dasharray="7 6"/>
-<text x="50" y="1251" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#21353F">Deployment verified. A full hosted sign-in-to-report journey remains to be verified.</text>
-<text x="50" y="1282" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Future integrations: venue email and replies, follow-ups, maps, alternative search and Calendar.</text>
+<text x="50" y="1251" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#21353F">Future integrations: venue email and replies, follow-ups, maps, alternative search and Calendar.</text>
 </svg>
